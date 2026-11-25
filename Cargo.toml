@@ -2,6 +2,12 @@
 members = ["crates/*"]
 resolver = "2"
 
+# konoma-plugin (from the registry) depends on konoma-vcs-core by version. Without this a second
+# copy of it is linked next to the one in this workspace, and its types (`DiffLine`,
+# `ChangeEntry`) stop matching the trait signatures. `cargo publish` strips this section.
+[patch.crates-io]
+konoma-vcs-core = { path = "crates/konoma-vcs-core" }
+
 [workspace.package]
 edition = "2021"
 rust-version = "1.92"

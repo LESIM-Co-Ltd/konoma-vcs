@@ -8,10 +8,10 @@ repository.workspace = true
 description = "konoma's Git and Jujutsu project screens"
 
 [dependencies]
-konoma-base = { path = "../konoma-base", version = "0.1.0" }
-konoma-plugin = { path = "../konoma-plugin", version = "0.1.0" }
+konoma-base = { version = "0.1.0" }
+konoma-plugin = { version = "0.1.0" }
 konoma-vcs-core = { path = "../konoma-vcs-core", version = "0.1.0" }
-konoma-file-plugins = { path = "../konoma-file-plugins", version = "0.1.0", default-features = false, optional = true }
+konoma-file-plugins = { version = "0.1.0", default-features = false, optional = true }
 
 [features]
 default = ["git", "app"]
@@ -21,7 +21,7 @@ git = ["konoma-vcs-core/git"]
 app = ["konoma-plugin/app", "dep:konoma-file-plugins"]
 
 [dev-dependencies]
-konoma-test-support = { path = "../konoma-test-support" }
+konoma-test-support = { version = "0.1.0" }
 
 [[bin]]
 name = "konoma-vcs"

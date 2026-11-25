@@ -1,0 +1,79 @@
+[workspace]
+members = ["crates/*"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.92"
+license = "MIT"
+repository = "https://github.com/LESIM-Co-Ltd/konoma-vcs"
+
+# Versions of every external dependency live here; the root package and the crates under
+# `crates/` take them with `name.workspace = true`. Explanatory comments stay next to the
+# root package's `[dependencies]` below.
+
+[workspace.dependencies]
+ratatui = { version = "0.30", features = ["unstable-rendered-line-info"] }
+crossterm = "0.29"
+ratatui-image = { version = "11", default-features = false, features = ["crossterm", "image-defaults", "tokio"] }
+image = "0.25"
+flate2 = "1"
+base64 = "0.23"
+resvg = "0.48"
+svgtypes = "0.16"
+skrifa = "0.44"
+hayro-syntax = { version = "0.8", default-features = false, features = ["std"] }
+hayro = { version = "0.8", default-features = false, features = ["embed-fonts", "embed-cmaps"] }
+rust_h264 = "0.4"
+rust_h265 = "0.1"
+re_mp4 = "0.5"
+symphonia-core = "0.6"
+symphonia-format-mkv = "0.6"
+ureq = { version = "3", default-features = false, features = ["rustls", "gzip"] }
+pulldown-cmark = { version = "0.13.6", default-features = false }
+mermaid-text = "0.58"
+syntect = { version = "5", default-features = false, features = ["default-fancy"] }
+two-face = { version = "0.5", default-features = false, features = ["syntect-fancy"] }
+unicode-width = "0.2"
+unicode-segmentation = "1"
+emojis = "0.9"
+serde = { version = "1", features = ["derive"] }
+toml = "1"
+# Rewrites `plugins.toml` in place (`konoma plugin`), keeping the user's comments and order.
+toml_edit = "0.25"
+sys-locale = "0.3"
+# クリップボード(konoma-host-core の `clipboard` が使う)。`wayland-data-control` を明示有効化=既定は X11 バックエンド(x11rb)のみで、
+# XWayland の無い Wayland セッション(sway/Hyprland で xwayland 無効・cage 等)では arboard の
+# Clipboard::new() 自体が失敗し `y` の全コピーが黙って不発になる(app.rs::set_clipboard の
+# Linux 分岐コメントは X11/Wayland 両対応と書いていたが実装は X11 のみだった)。
+# 新規依存 wl-clipboard-rs は `target.'cfg(all(unix, not(any(macos,android,emscripten))))'`
+# 配下=非 macOS Unix のみでビルドされ macOS には一切コンパイルされない(cargo tree で確認済)。
+arboard = { version = "3", features = ["wayland-data-control"] }
+globset = "0.4"
+infer = "0.22"
+csv = "1"
+zip = { version = "9", default-features = false, features = ["deflate-flate2"] }
+tar = { version = "0.4.45", default-features = false }
+calamine = { version = "0.38", default-features = false }
+encoding_rs = "0.8"
+cfb = "0.15"
+quick-xml = "0.42"
+git2 = "0.21"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "process", "sync"] }
+anyhow = "1"
+notify = "8.2.0"
+trash = "5"
+ratex-parser = "0.1"
+ratex-layout = "0.1"
+ratex-svg = { version = "0.1", default-features = false, features = ["embed-fonts"] }
+ratex-types = "0.1"
+ratex-katex-fonts = "0.1"
+similar = "3.1.1"
+nucleo-matcher = "0.3"
+ignore = "0.4.33"
+log = "0.4"
+libc = "0.2"
+signal-hook = "0.4"
+serde_json = "1"
+# MessagePack codec of the plugin child-process wire (konoma-plugin feature `proc`).
+rmp-serde = "1.3"

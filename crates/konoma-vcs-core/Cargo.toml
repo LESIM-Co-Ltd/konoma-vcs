@@ -8,7 +8,7 @@ repository.workspace = true
 description = "konoma's version-control reading: git (libgit2 and the git CLI) and jj (Jujutsu) behind one read surface, plus the commit-graph layout"
 
 [dependencies]
-konoma-base = { path = "../konoma-base", version = "0.1.0" }
+konoma-base = { version = "0.1.0" }
 anyhow.workspace = true
 similar.workspace = true
 # git (任意機能。MVP は git2 を試す。コマンド委譲でも可)
@@ -18,7 +18,7 @@ git2 = { workspace = true, optional = true }
 ignore.workspace = true
 
 [dev-dependencies]
-konoma-test-support = { path = "../konoma-test-support" }
+konoma-test-support = { version = "0.1.0" }
 
 [features]
 default = []
